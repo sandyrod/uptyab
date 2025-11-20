@@ -374,6 +374,193 @@
                     }
                 }
             }
+        },
+        "/api/parroquias": {
+            "get": {
+                "tags": [
+                    "Parroquias"
+                ],
+                "summary": "Obtener lista de parroquias",
+                "operationId": "4b77171a495670bdf366d7f145d6a6dd",
+                "responses": {
+                    "200": {
+                        "description": "Lista de parroquias",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Parroquia"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Parroquias"
+                ],
+                "summary": "Crear una nueva parroquia",
+                "operationId": "0d68fc6d92779350b751f165abc74307",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "municipio_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Parroquia Ejemplo"
+                                    },
+                                    "municipio_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Parroquia creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Parroquia"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/parroquias/{id}": {
+            "get": {
+                "tags": [
+                    "Parroquias"
+                ],
+                "summary": "Obtener una parroquia específica",
+                "operationId": "58367a3f3984461a276c30b26abebaa1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la parroquia",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Parroquia encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Parroquia"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Parroquia no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Parroquias"
+                ],
+                "summary": "Actualizar una parroquia existente",
+                "operationId": "0cc4b3f799f46617f5d2b0319150996e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la parroquia a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Parroquia Actualizada"
+                                    },
+                                    "municipio_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Parroquia actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Parroquia"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Parroquia no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Parroquias"
+                ],
+                "summary": "Eliminar una parroquia",
+                "operationId": "3669554945c5a37517a6f77df105960d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la parroquia a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Parroquia eliminada exitosamente"
+                    },
+                    "404": {
+                        "description": "Parroquia no encontrada"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -445,6 +632,37 @@
                     }
                 },
                 "type": "object"
+            },
+            "Parroquia": {
+                "title": "Parroquia",
+                "description": "Modelo que representa una parroquia",
+                "properties": {
+                    "id": {
+                        "description": "ID de la parroquia",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "description": "Nombre de la parroquia",
+                        "type": "string"
+                    },
+                    "municipio_id": {
+                        "description": "ID del municipio al que pertenece",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
             }
         }
     },
@@ -452,6 +670,10 @@
         {
             "name": "Municipios",
             "description": "Endpoints para la gestión de municipios"
+        },
+        {
+            "name": "Parroquias",
+            "description": "Endpoints para la gestión de parroquias"
         },
         {
             "name": "Estados",
