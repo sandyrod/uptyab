@@ -12,6 +12,193 @@
         }
     ],
     "paths": {
+        "/api/comunidades": {
+            "get": {
+                "tags": [
+                    "Comunidades"
+                ],
+                "summary": "Obtener lista de comunidades",
+                "operationId": "49662c4c5570ddde98268c91c5655d34",
+                "responses": {
+                    "200": {
+                        "description": "Lista de comunidades",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Comunidad"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Comunidades"
+                ],
+                "summary": "Crear una nueva comunidad",
+                "operationId": "bdd6db746192a98c65cff0be05de7954",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "parroquia_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Comunidad Ejemplo"
+                                    },
+                                    "parroquia_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Comunidad creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Comunidad"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/comunidades/{id}": {
+            "get": {
+                "tags": [
+                    "Comunidades"
+                ],
+                "summary": "Obtener una comunidad específica",
+                "operationId": "707e6237f9276072cce0f4e23d648312",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la comunidad",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comunidad encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Comunidad"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comunidad no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Comunidades"
+                ],
+                "summary": "Actualizar una comunidad existente",
+                "operationId": "e81b67bef8623ea4d873649f94e38f90",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la comunidad a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Comunidad Actualizada"
+                                    },
+                                    "parroquia_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Comunidad actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Comunidad"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Comunidad no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Comunidades"
+                ],
+                "summary": "Eliminar una comunidad",
+                "operationId": "d8a295391019df1fab7ce2221a793436",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la comunidad a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Comunidad eliminada exitosamente"
+                    },
+                    "404": {
+                        "description": "Comunidad no encontrada"
+                    }
+                }
+            }
+        },
         "/api/estados": {
             "get": {
                 "tags": [
@@ -602,6 +789,37 @@
                 },
                 "type": "object"
             },
+            "Comunidad": {
+                "title": "Comunidad",
+                "description": "Modelo que representa una comunidad",
+                "properties": {
+                    "id": {
+                        "description": "ID de la comunidad",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "description": "Nombre de la comunidad",
+                        "type": "string"
+                    },
+                    "parroquia_id": {
+                        "description": "ID de la parroquia a la que pertenece",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
             "Municipio": {
                 "title": "Municipio",
                 "description": "Modelo que representa un municipio",
@@ -667,6 +885,10 @@
         }
     },
     "tags": [
+        {
+            "name": "Comunidades",
+            "description": "Endpoints para la gestión de comunidades"
+        },
         {
             "name": "Municipios",
             "description": "Endpoints para la gestión de municipios"
