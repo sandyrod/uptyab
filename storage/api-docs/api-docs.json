@@ -1,0 +1,461 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Estados",
+        "description": "API para gestión de estados",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://uptyab.test/api",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/api/estados": {
+            "get": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Obtener todos los estados",
+                "operationId": "04584071eeb93a05b4d94f84dde14746",
+                "responses": {
+                    "200": {
+                        "description": "Lista de estados obtenida exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Estado"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Crear un nuevo estado",
+                "operationId": "168ee96f5381c240d726d06b7cf4e082",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EstadoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estado creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estado"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/estados/{id}": {
+            "get": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Obtener un estado específico",
+                "operationId": "006e5abc6267b1c9a52f5b2b0c5a8714",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estado obtenido exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estado"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Estado no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Actualizar un estado existente",
+                "operationId": "cbcb4c1cecdb98fff7097741870a857a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estado a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EstadoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Estado actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Estado"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Estado no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Estados"
+                ],
+                "summary": "Eliminar un estado",
+                "operationId": "7708ca0cd2434194bfce93c5de960421",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del estado a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estado eliminado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Estado eliminado correctamente"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Estado no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/municipios": {
+            "get": {
+                "tags": [
+                    "Municipios"
+                ],
+                "summary": "Obtener lista de municipios",
+                "operationId": "d284659ad193a11b02a7150e785420fe",
+                "responses": {
+                    "200": {
+                        "description": "Lista de municipios",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Municipio"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Municipios"
+                ],
+                "summary": "Crear un nuevo municipio",
+                "operationId": "9242777b9e2dcd4b0a84388cad728668",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "estado_id"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Municipio Ejemplo"
+                                    },
+                                    "estado_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Municipio creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Municipio"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/municipios/{id}": {
+            "get": {
+                "tags": [
+                    "Municipios"
+                ],
+                "summary": "Obtener un municipio específico",
+                "operationId": "8720f7908a99ba9e6bd363381c83efb1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del municipio",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Municipio encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Municipio"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Municipio no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Municipios"
+                ],
+                "summary": "Actualizar un municipio existente",
+                "operationId": "dc95a51088d9c1e823b19159865d2b06",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del municipio a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Municipio Actualizado"
+                                    },
+                                    "estado_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Municipio actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Municipio"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Municipio no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Municipios"
+                ],
+                "summary": "Eliminar un municipio",
+                "operationId": "ad39c93d4dc1ca06c522db609e15a8b2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del municipio a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Municipio eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "Municipio no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Estado": {
+                "title": "Estado",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nombre": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Activo"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "EstadoRequest": {
+                "title": "EstadoRequest",
+                "required": [
+                    "nombre"
+                ],
+                "properties": {
+                    "nombre": {
+                        "type": "string",
+                        "maxLength": 60,
+                        "example": "Activo"
+                    }
+                },
+                "type": "object"
+            },
+            "Municipio": {
+                "title": "Municipio",
+                "description": "Modelo que representa un municipio",
+                "properties": {
+                    "id": {
+                        "description": "ID del municipio",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "description": "Nombre del municipio",
+                        "type": "string"
+                    },
+                    "estado_id": {
+                        "description": "ID del estado al que pertenece",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Municipios",
+            "description": "Endpoints para la gestión de municipios"
+        },
+        {
+            "name": "Estados",
+            "description": "Estados"
+        }
+    ]
+}
