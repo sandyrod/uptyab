@@ -17,14 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create default admin user
+        // User::factory(10)->create();
+
         User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('password'),
+            'name' => 'Test User',
+            'email' => 'test@example.com',
         ]);
 
-        // Run seeders
         $this->call([
             VenezuelaStatesSeeder::class,
             MunicipiosVenezuelaSeeder::class,
