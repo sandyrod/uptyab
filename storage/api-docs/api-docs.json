@@ -748,6 +748,1145 @@
                     }
                 }
             }
+        },
+        "/api/personas": {
+            "get": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Obtener lista de personas",
+                "operationId": "8601618afc784c4736e52022f7f6f047",
+                "responses": {
+                    "200": {
+                        "description": "Lista de personas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Persona"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Crear una nueva persona",
+                "operationId": "d016dca10e1a596471fe5aa5d4c99841",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "cedula",
+                                    "nombres",
+                                    "apellidos"
+                                ],
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "cedula": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "V12345678"
+                                    },
+                                    "nombres": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "María"
+                                    },
+                                    "apellidos": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "González"
+                                    },
+                                    "cuenta": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "1234567890",
+                                        "nullable": true
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "+584123456789",
+                                        "nullable": true
+                                    },
+                                    "cargo": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Gerente",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Persona creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Persona"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/personas/{id}": {
+            "get": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Obtener una persona por ID",
+                "operationId": "9b70ed1d108dd682ec86b7c48f328884",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la persona",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Persona encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Persona"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Actualizar una persona existente",
+                "operationId": "2a6e07dc32d26f218b13c0a2dc442fdf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la persona a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "usuario_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "cedula": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "V12345678"
+                                    },
+                                    "nombres": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "María"
+                                    },
+                                    "apellidos": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "González"
+                                    },
+                                    "cuenta": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "1234567890",
+                                        "nullable": true
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "+584123456789",
+                                        "nullable": true
+                                    },
+                                    "cargo": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Gerente",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Persona actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Persona"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Personas"
+                ],
+                "summary": "Eliminar una persona",
+                "operationId": "8564ed4ed7e2d07b09bda4aac6184710",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la persona a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Persona eliminada exitosamente"
+                    },
+                    "404": {
+                        "description": "Persona no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Obtener lista de roles",
+                "operationId": "77e3636d8592997ce9d6d27b50857a69",
+                "responses": {
+                    "200": {
+                        "description": "Lista de roles",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Role"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Crear un nuevo rol",
+                "operationId": "4a563842fbfcad237f63da43065fca3d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rol",
+                                    "descripcion",
+                                    "nivel_acceso"
+                                ],
+                                "properties": {
+                                    "rol": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "Administrador"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "maxLength": 500,
+                                        "example": "Tiene acceso completo al sistema"
+                                    },
+                                    "nivel_acceso": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "estado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Rol creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Role"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Obtener un rol por ID",
+                "operationId": "7fb0667a295b7678a30353aa11739683",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Rol encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Role"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Actualizar un rol existente",
+                "operationId": "786d6990093a8eb3a56931f19a827e43",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rol": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "Administrador"
+                                    },
+                                    "descripcion": {
+                                        "type": "string",
+                                        "maxLength": 500,
+                                        "example": "Tiene acceso completo al sistema"
+                                    },
+                                    "nivel_acceso": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "estado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Rol actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Role"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Eliminar un rol",
+                "operationId": "8285c46981c60ad600aa4077307aec04",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del rol a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Rol eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "Rol no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/ubicaciones": {
+            "get": {
+                "tags": [
+                    "Ubicaciones"
+                ],
+                "summary": "Obtener lista de ubicaciones",
+                "operationId": "f02b0c7bb15c07620cb90f5d02e85c04",
+                "responses": {
+                    "200": {
+                        "description": "Lista de ubicaciones",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Ubicacion"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Ubicaciones"
+                ],
+                "summary": "Crear una nueva ubicación",
+                "operationId": "6de080f6bce2ff5ee12f66b8582803fb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comunidad_id",
+                                    "nombre"
+                                ],
+                                "properties": {
+                                    "comunidad_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Ubicación Principal"
+                                    },
+                                    "calle": {
+                                        "type": "string",
+                                        "example": "Calle Principal"
+                                    },
+                                    "avenida": {
+                                        "type": "string",
+                                        "example": "Avenida Bolívar"
+                                    },
+                                    "referencia": {
+                                        "type": "string",
+                                        "example": "Frente a la plaza"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ubicación creada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ubicacion"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/ubicaciones/{id}": {
+            "get": {
+                "tags": [
+                    "Ubicaciones"
+                ],
+                "summary": "Obtener una ubicación específica",
+                "operationId": "5fcf8be8fa7dd2ffd3b40f322ff96fb1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la ubicación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ubicación encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ubicacion"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ubicación no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Ubicaciones"
+                ],
+                "summary": "Actualizar una ubicación existente",
+                "operationId": "e4538fce84aecad890f922096eb62172",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la ubicación a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comunidad_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Ubicación Actualizada"
+                                    },
+                                    "calle": {
+                                        "type": "string",
+                                        "example": "Calle Actualizada"
+                                    },
+                                    "avenida": {
+                                        "type": "string",
+                                        "example": "Avenida Actualizada"
+                                    },
+                                    "referencia": {
+                                        "type": "string",
+                                        "example": "Referencia actualizada"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ubicación actualizada exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ubicacion"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ubicación no encontrada"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Ubicaciones"
+                ],
+                "summary": "Eliminar una ubicación",
+                "operationId": "b247926f51daa193f72b8fa31c88174a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la ubicación a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Ubicación eliminada exitosamente"
+                    },
+                    "404": {
+                        "description": "Ubicación no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Obtener lista de usuarios",
+                "operationId": "e9d4d8b419dbef04b5748fbf9ccf3881",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usuarios",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Usuario"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Crear un nuevo usuario",
+                "operationId": "4e9dbcbdaaaf9faab196a82d5cbaea23",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rol_id",
+                                    "cedula",
+                                    "nombres",
+                                    "apellidos",
+                                    "email",
+                                    "clave"
+                                ],
+                                "properties": {
+                                    "rol_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "cedula": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "V12345678"
+                                    },
+                                    "nombres": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Juan"
+                                    },
+                                    "apellidos": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Pérez"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "maxLength": 100,
+                                        "example": "juan@example.com"
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "+584123456789",
+                                        "nullable": true
+                                    },
+                                    "clave": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "password123"
+                                    },
+                                    "estado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/usuarios/{id}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Obtener un usuario por ID",
+                "operationId": "e9ac05ddc4ea46d8848b012d7d92e3ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Actualizar un usuario existente",
+                "operationId": "27ac608b6dd8b8e7c7c45b10c5210b3e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "rol_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "cedula": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "V12345678"
+                                    },
+                                    "nombres": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Juan"
+                                    },
+                                    "apellidos": {
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Pérez"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "maxLength": 100,
+                                        "example": "juan@example.com"
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "maxLength": 20,
+                                        "example": "+584123456789",
+                                        "nullable": true
+                                    },
+                                    "clave": {
+                                        "type": "string",
+                                        "minLength": 6,
+                                        "example": "nuevapassword"
+                                    },
+                                    "estado": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Eliminar un usuario",
+                "operationId": "ea700764859a665afd38bb39c2842f1c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del usuario a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuario eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "Usuario no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/votacion-centros": {
+            "get": {
+                "tags": [
+                    "VotacionCentros"
+                ],
+                "summary": "Obtener lista de centros de votación",
+                "operationId": "f09a60b421e53dde9cf1e31364732e2b",
+                "responses": {
+                    "200": {
+                        "description": "Lista de centros de votación",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/VotacionCentro"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "VotacionCentros"
+                ],
+                "summary": "Crear un nuevo centro de votación",
+                "operationId": "599dda5b897748108c853ba6ce66a483",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "ubicacion_id",
+                                    "nombre",
+                                    "cantidad_electores",
+                                    "codigo"
+                                ],
+                                "properties": {
+                                    "ubicacion_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "persona_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "example": "Unidad Educativa Nacional Bolivariana"
+                                    },
+                                    "cantidad_electores": {
+                                        "type": "integer",
+                                        "example": 500
+                                    },
+                                    "codigo": {
+                                        "type": "integer",
+                                        "example": 1234567890
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Centro de votación creado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VotacionCentro"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/api/votacion-centros/{id}": {
+            "get": {
+                "tags": [
+                    "VotacionCentros"
+                ],
+                "summary": "Obtener un centro de votación por ID",
+                "operationId": "090e1269bb287d9df9bd261ad72fd4fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del centro de votación",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Centro de votación encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VotacionCentro"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Centro de votación no encontrado"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "VotacionCentros"
+                ],
+                "summary": "Actualizar un centro de votación existente",
+                "operationId": "34cdf3a035e7f30ccf2d2171057e79b2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del centro de votación a actualizar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "ubicacion_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "persona_id": {
+                                        "type": "integer",
+                                        "example": 1,
+                                        "nullable": true
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "maxLength": 255,
+                                        "example": "Nuevo nombre del centro"
+                                    },
+                                    "cantidad_electores": {
+                                        "type": "integer",
+                                        "example": 600
+                                    },
+                                    "codigo": {
+                                        "type": "integer",
+                                        "example": 1234567890
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Centro de votación actualizado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/VotacionCentro"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Centro de votación no encontrado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "VotacionCentros"
+                ],
+                "summary": "Eliminar un centro de votación",
+                "operationId": "6fddd3359d88880593fd6a40cc8e2042",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del centro de votación a eliminar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Centro de votación eliminado exitosamente"
+                    },
+                    "404": {
+                        "description": "Centro de votación no encontrado"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -881,6 +2020,258 @@
                     }
                 },
                 "type": "object"
+            },
+            "Persona": {
+                "title": "Persona",
+                "description": "Modelo que representa una persona en el sistema",
+                "properties": {
+                    "id": {
+                        "description": "ID de la persona",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "usuario_id": {
+                        "description": "ID del usuario asociado",
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "cedula": {
+                        "description": "Número de cédula de la persona",
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "nombres": {
+                        "description": "Nombres de la persona",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "apellidos": {
+                        "description": "Apellidos de la persona",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "cuenta": {
+                        "description": "Número de cuenta de la persona",
+                        "type": "string",
+                        "maxLength": 50,
+                        "nullable": true
+                    },
+                    "telefono": {
+                        "description": "Número de teléfono de la persona",
+                        "type": "string",
+                        "maxLength": 20,
+                        "nullable": true
+                    },
+                    "cargo": {
+                        "description": "Cargo o puesto de la persona",
+                        "type": "string",
+                        "maxLength": 100,
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Role": {
+                "title": "Role",
+                "description": "Modelo que representa un rol en el sistema",
+                "properties": {
+                    "id": {
+                        "description": "ID del rol",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "rol": {
+                        "description": "Nombre del rol",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "descripcion": {
+                        "description": "Descripción detallada del rol",
+                        "type": "string",
+                        "maxLength": 500
+                    },
+                    "nivel_acceso": {
+                        "description": "Nivel de acceso del rol (mayor número = más privilegios)",
+                        "type": "integer"
+                    },
+                    "estado": {
+                        "description": "Estado del rol (activo/inactivo)",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Ubicacion": {
+                "title": "Ubicacion",
+                "description": "Modelo que representa una ubicación",
+                "properties": {
+                    "id": {
+                        "description": "ID de la ubicación",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "comunidad_id": {
+                        "description": "ID de la comunidad a la que pertenece",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "nombre": {
+                        "description": "Nombre de la ubicación",
+                        "type": "string"
+                    },
+                    "calle": {
+                        "description": "Calle de la ubicación",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "avenida": {
+                        "description": "Avenida de la ubicación",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "referencia": {
+                        "description": "Referencia de la ubicación",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Usuario": {
+                "title": "Usuario",
+                "description": "Modelo que representa un usuario del sistema",
+                "properties": {
+                    "id": {
+                        "description": "ID del usuario",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "rol_id": {
+                        "description": "ID del rol del usuario",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "cedula": {
+                        "description": "Número de cédula del usuario",
+                        "type": "string",
+                        "maxLength": 20
+                    },
+                    "nombres": {
+                        "description": "Nombres del usuario",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "apellidos": {
+                        "description": "Apellidos del usuario",
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "email": {
+                        "description": "Correo electrónico del usuario",
+                        "type": "string",
+                        "format": "email",
+                        "maxLength": 100
+                    },
+                    "telefono": {
+                        "description": "Número de teléfono del usuario",
+                        "type": "string",
+                        "maxLength": 20,
+                        "nullable": true
+                    },
+                    "estado": {
+                        "description": "Estado del usuario (activo/inactivo)",
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "VotacionCentro": {
+                "title": "VotacionCentro",
+                "description": "Modelo que representa un centro de votación",
+                "properties": {
+                    "id": {
+                        "description": "ID del centro de votación",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "ubicacion_id": {
+                        "description": "ID de la ubicación del centro",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "persona_id": {
+                        "description": "ID de la persona responsable",
+                        "type": "integer",
+                        "format": "int64",
+                        "nullable": true
+                    },
+                    "nombre": {
+                        "description": "Nombre del centro de votación",
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "cantidad_electores": {
+                        "description": "Cantidad de electores en el centro",
+                        "type": "integer"
+                    },
+                    "codigo": {
+                        "description": "Código único del centro de votación",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "created_at": {
+                        "description": "Fecha de creación",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Fecha de actualización",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
             }
         }
     },
@@ -896,6 +2287,26 @@
         {
             "name": "Parroquias",
             "description": "Endpoints para la gestión de parroquias"
+        },
+        {
+            "name": "Personas",
+            "description": "Endpoints para la gestión de personas"
+        },
+        {
+            "name": "Roles",
+            "description": "Endpoints para la gestión de roles"
+        },
+        {
+            "name": "Ubicaciones",
+            "description": "Endpoints para la gestión de ubicaciones"
+        },
+        {
+            "name": "Usuarios",
+            "description": "Endpoints para la gestión de usuarios"
+        },
+        {
+            "name": "VotacionCentros",
+            "description": "Endpoints para la gestión de centros de votación"
         },
         {
             "name": "Estados",
