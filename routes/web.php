@@ -2,14 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/test-db', function () {
-    try {
-        DB::connection()->getPdo();
-        return "Conexión exitosa a la base de datos!";
-    } catch (\Exception $e) {
-        return "Error en la conexión: " . $e->getMessage();
-    }
-});
+// Rutas para Vue - SPA (excluyendo las rutas API)
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '^(?!api).*$');

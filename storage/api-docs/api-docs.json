@@ -1671,6 +1671,64 @@
                 }
             }
         },
+        "/api/usuarios/login": {
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "Iniciar sesión de usuario",
+                "operationId": "19940551a92d6267504f669c6c58197e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "clave"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "usuario@example.com"
+                                    },
+                                    "clave": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inicio de sesión exitoso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "usuario": {
+                                            "$ref": "#/components/schemas/Usuario"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|XxYyZz..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciales inválidas"
+                    }
+                }
+            }
+        },
         "/api/votacion-centros": {
             "get": {
                 "tags": [

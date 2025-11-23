@@ -229,4 +229,56 @@ class UsuarioController extends Controller
         $usuario->delete();
         return response()->json(null, 204);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/usuarios/login",
+     *     summary="Iniciar sesión de usuario",
+     *     tags={"Usuarios"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"email","clave"},
+     *             @OA\Property(property="email", type="string", format="email", example="usuario@example.com"),
+     *             @OA\Property(property="clave", type="string", example="password123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Inicio de sesión exitoso",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="usuario", ref="#/components/schemas/Usuario"),
+     *             @OA\Property(property="token", type="string", example="1|XxYyZz...")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Credenciales inválidas"
+     *     )
+     * )
+     */
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'clave' => 'required|string',
+        ]);
+
+        $usuario = Usuario::where('email', $request->email)->first();
+
+        if (!$usuario || !Hash::check($request->clave, $usuario->clave)) {
+            return response()->json(['message' => 'Credenciales inválidas'], 401);
+        }
+
+        // Cargar la relación de roles
+        $usuario->load('rol');
+
+        // Crear token de autenticación
+        $token = $usuario->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'usuario' => $usuario,
+            'token' => $token
+        ]);
+    }
 }
