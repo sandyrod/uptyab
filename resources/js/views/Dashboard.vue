@@ -44,6 +44,84 @@
                         <span>Parroquias</span>
                     </router-link>
                 </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/comunidades"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'comunidades'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Comunidades</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/ubicaciones"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'ubicaciones'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Ubicaciones</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/roles"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'roles'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Roles</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/usuarios"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'usuarios'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Usuarios</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/personas"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'personas'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Personas</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/centros-votacion"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'centros-votacion'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Centros de Votación</span>
+                    </router-link>
+                </div>
                 <!-- Other navigation items... -->
             </nav>
             <nav class="mt-6">
@@ -70,6 +148,12 @@
                         <template v-else-if="$route.name === 'estados'">Gestión de Estados</template>
                         <template v-else-if="$route.name === 'municipios'">Gestión de Municipios</template>
                         <template v-else-if="$route.name === 'parroquias'">Gestión de Parroquias</template>
+                        <template v-else-if="$route.name === 'comunidades'">Gestión de Comunidades</template>
+                        <template v-else-if="$route.name === 'ubicaciones'">Gestión de Ubicaciones</template>
+                        <template v-else-if="$route.name === 'roles'">Gestión de Roles</template>
+                        <template v-else-if="$route.name === 'usuarios'">Gestión de Usuarios</template>
+                        <template v-else-if="$route.name === 'personas'">Gestión de Personas</template>
+                        <template v-else-if="$route.name === 'centros-votacion'">Gestión de Centros de Votación</template>
                         <template v-else>{{ $route.name }}</template>
                     </h2>
                     <img src="/images/cne.svg" alt="Logo CNE" class="h-10 w-auto">

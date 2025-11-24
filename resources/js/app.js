@@ -7,6 +7,13 @@ import Login from './views/Login.vue';
 import Dashboard from './views/Dashboard.vue';
 import Estados from './views/Estados.vue';
 import Municipios from './views/Municipios.vue';
+import Comunidades from './views/Comunidades.vue';
+import Parroquias from './views/Parroquias.vue';
+import Ubicaciones from './views/Ubicaciones.vue';
+import Roles from './views/Roles.vue';
+import Usuarios from './views/Usuarios.vue';
+import Personas from './views/Personas.vue';
+import CentrosVotacion from './views/CentroVotacion.vue';
 import { useAuthStore } from './stores/auth';
 import axios from 'axios';
 
@@ -43,8 +50,38 @@ const router = createRouter({
                 {
                     path: 'parroquias',
                     name: 'parroquias',
-                    component: () => import('./views/Parroquias.vue')
-                }
+                    component: Parroquias
+                },
+                {
+                    path: 'comunidades',
+                    name: 'comunidades',
+                    component: Comunidades
+                },
+                {
+                    path: 'ubicaciones',
+                    name: 'ubicaciones',
+                    component: Ubicaciones
+                },
+                {
+                    path: 'roles',
+                    name: 'roles',
+                    component: Roles
+                },
+                {
+                    path: 'usuarios',
+                    name: 'usuarios',
+                    component: Usuarios
+                },
+                {
+                    path: 'personas',
+                    name: 'personas',
+                    component: Personas
+                },
+                {
+                    path: 'centros-votacion',
+                    name: 'centros-votacion',
+                    component: CentrosVotacion
+                },
             ]
         },
         {
