@@ -24,7 +24,7 @@ class AfluenciaController extends Controller
      */
     public function index()
     {
-        return Afluencia::with('evento')->get();
+        return Afluencia::with(['evento', 'votacionCentro'])->get();
     }
 
     /**
@@ -51,6 +51,7 @@ class AfluenciaController extends Controller
     {
         $request->validate([
             'evento_id' => 'required|exists:eventos,id',
+            'votacion_centro_id' => 'required|exists:votacion_centros,id', // Nueva validación
             'cantidadvotantes' => 'required|integer',
             'hora' => 'required|date_format:H:i',
         ]);
@@ -82,7 +83,7 @@ class AfluenciaController extends Controller
      */
     public function show($id)
     {
-        return Afluencia::with('evento')->findOrFail($id);
+        return Afluencia::with(['evento', 'votacionCentro'])->findOrFail($id);
     }
 
     /**
@@ -121,6 +122,7 @@ class AfluenciaController extends Controller
 
         $request->validate([
             'evento_id' => 'sometimes|required|exists:eventos,id',
+            'votacion_centro_id' => 'sometimes|required|exists:votacion_centros,id', // Nueva validación
             'cantidadvotantes' => 'sometimes|required|integer',
             'hora' => 'sometimes|required|date_format:H:i',
         ]);

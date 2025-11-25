@@ -11,6 +11,7 @@ class Afluencia extends Model
 
     protected $fillable = [
         'evento_id',
+        'votacion_centro_id', // Nuevo campo
         'cantidadvotantes',
         'hora',
     ];
@@ -18,5 +19,11 @@ class Afluencia extends Model
     public function evento()
     {
         return $this->belongsTo(Evento::class);
+    }
+
+    // Nueva relación con centro de votación
+    public function votacionCentro()
+    {
+        return $this->belongsTo(VotacionCentro::class);
     }
 }

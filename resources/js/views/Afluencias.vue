@@ -17,7 +17,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Buscar por evento..."
+          placeholder="Buscar por evento o centro..."
           class="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           @keyup.enter="fetchAfluencias"
         />
@@ -56,6 +56,7 @@
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Evento</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Centro de Votación</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad de Votantes</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hora</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Creado</th>
@@ -66,6 +67,7 @@
           <tr v-for="afluencia in afluenciasFiltrados" :key="afluencia.id" class="hover:bg-gray-50">
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ afluencia.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ afluencia.evento?.nombre || 'N/A' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ afluencia.votacion_centro?.nombre || 'N/A' }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ afluencia.cantidadvotantes }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ afluencia.hora }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatDate(afluencia.created_at) }}</td>
@@ -114,6 +116,25 @@
                 </option>
               </select>
               <p v-if="formErrors.evento_id" class="text-red-500 text-xs italic mt-1">{{ formErrors.evento_id[0] }}</p>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="votacion_centro_id">
+                Centro de Votación
+              </label>
+              <select
+                id="votacion_centro_id"
+                v-model="formData.votacion_centro_id"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                :class="{'border-red-500': formErrors.votacion_centro_id}"
+                required
+              >
+                <option value="">Seleccione un centro de votación</option>
+                <option v-for="centro in votacionCentros" :key="centro.id" :value="centro.id">
+                  {{ centro.nombre }} ({{ centro.codigo }})
+                </option>
+              </select>
+              <p v-if="formErrors.votacion_centro_id" class="text-red-500 text-xs italic mt-1">{{ formErrors.votacion_centro_id[0] }}</p>
             </div>
 
             <div class="mb-4">
@@ -173,7 +194,7 @@
       <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
         <div class="p-6">
           <h2 class="text-xl font-semibold text-red-600 mb-4">Confirmar Eliminación</h2>
-          <p class="mb-6">¿Estás seguro de que deseas eliminar la afluencia del evento "{{ afluenciaToDelete?.evento?.nombre }}"?</p>
+          <p class="mb-6">¿Estás seguro de que deseas eliminar la afluencia del evento "{{ afluenciaToDelete?.evento?.nombre }}" en el centro "{{ afluenciaToDelete?.votacion_centro?.nombre }}"?</p>
           
           <div class="flex justify-end space-x-3">
             <button
@@ -206,6 +227,7 @@ export default {
   setup() {
     const afluencias = ref([]);
     const eventos = ref([]);
+    const votacionCentros = ref([]);
     const loading = ref(false);
     const saving = ref(false);
     const deleting = ref(false);
@@ -219,6 +241,7 @@ export default {
     const formData = ref({
       id: null,
       evento_id: '',
+      votacion_centro_id: '',
       cantidadvotantes: '',
       hora: ''
     });
@@ -234,6 +257,7 @@ export default {
       const query = searchQuery.value.toLowerCase();
       return afluencias.value.filter(afluencia => 
         (afluencia.evento?.nombre?.toLowerCase() || '').includes(query) ||
+        (afluencia.votacion_centro?.nombre?.toLowerCase() || '').includes(query) ||
         afluencia.cantidadvotantes.toString().includes(query) ||
         afluencia.hora.toLowerCase().includes(query)
       );
@@ -244,13 +268,15 @@ export default {
       error.value = null;
       
       try {
-        const [afluenciasRes, eventosRes] = await Promise.all([
-          axios.get('/afluencias?with=evento'),
-          axios.get('/eventos')
+        const [afluenciasRes, eventosRes, centrosRes] = await Promise.all([
+          axios.get('/afluencias'),
+          axios.get('/eventos'),
+          axios.get('/votacion-centros') // Asumiendo que tienes esta ruta
         ]);
         
         afluencias.value = afluenciasRes.data;
         eventos.value = eventosRes.data;
+        votacionCentros.value = centrosRes.data;
         
       } catch (err) {
         console.error('Error fetching afluencias:', err);
@@ -266,6 +292,7 @@ export default {
         formData.value = { 
           id: afluencia.id, 
           evento_id: afluencia.evento_id,
+          votacion_centro_id: afluencia.votacion_centro_id,
           cantidadvotantes: afluencia.cantidadvotantes,
           hora: afluencia.hora
         };
@@ -274,6 +301,7 @@ export default {
         formData.value = { 
           id: null, 
           evento_id: '',
+          votacion_centro_id: '',
           cantidadvotantes: '',
           hora: ''
         };
@@ -287,6 +315,7 @@ export default {
       formData.value = { 
         id: null, 
         evento_id: '',
+        votacion_centro_id: '',
         cantidadvotantes: '',
         hora: ''
       };
@@ -302,12 +331,14 @@ export default {
         if (isEditing.value) {
           await axios.put(`/afluencias/${formData.value.id}`, {
             evento_id: formData.value.evento_id,
+            votacion_centro_id: formData.value.votacion_centro_id,
             cantidadvotantes: formData.value.cantidadvotantes,
             hora: formData.value.hora
           });
         } else {
           await axios.post('/afluencias', {
             evento_id: formData.value.evento_id,
+            votacion_centro_id: formData.value.votacion_centro_id,
             cantidadvotantes: formData.value.cantidadvotantes,
             hora: formData.value.hora
           });
@@ -378,6 +409,7 @@ export default {
       afluencias,
       afluenciasFiltrados,
       eventos,
+      votacionCentros,
       loading,
       saving,
       deleting,
