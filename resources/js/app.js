@@ -14,6 +14,11 @@ import Roles from './views/Roles.vue';
 import Usuarios from './views/Usuarios.vue';
 import Personas from './views/Personas.vue';
 import CentrosVotacion from './views/CentroVotacion.vue';
+import Eventos from './views/Eventos.vue';
+import Afluencias from './views/Afluencias.vue';
+import Comunas from './views/Comunas.vue';
+import Partidos from './views/Partidos.vue';
+
 import { useAuthStore } from './stores/auth';
 import axios from 'axios';
 
@@ -81,6 +86,26 @@ const router = createRouter({
                     path: 'centros-votacion',
                     name: 'centros-votacion',
                     component: CentrosVotacion
+                },
+                {
+                    path: 'eventos',
+                    name: 'eventos',
+                    component: Eventos
+                },
+                {
+                    path: 'afluencias',
+                    name: 'afluencias',
+                    component: Afluencias
+                },
+                {
+                    path: 'comunas',
+                    name: 'comunas',
+                    component: Comunas
+                },
+                {
+                    path: 'partidos',
+                    name: 'partidos',
+                    component: Partidos
                 },
             ]
         },
