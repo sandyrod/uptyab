@@ -67,7 +67,7 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'usuario_id' => 'nullable|exists:usuarios,id',
+            //'usuario_id' => 'nullable|exists:usuarios,id',
             'cedula' => 'required|string|max:20|unique:personas,cedula',
             'nombres' => 'required|string|max:100',
             'apellidos' => 'required|string|max:100',
