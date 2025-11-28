@@ -57,6 +57,7 @@
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Centro de Votación</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Creado</th>
             <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
           </tr>
@@ -66,6 +67,18 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ evento.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ evento.nombre }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ evento.votacion_centro?.nombre || 'N/A' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span 
+                :class="[
+                  'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium',
+                  evento.iscomunal 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-gray-100 text-gray-800'
+                ]"
+              >
+                {{ evento.iscomunal ? 'Elección Comunal' : 'Normal' }}
+              </span>
+            </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ formatDate(evento.created_at) }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <button
@@ -128,6 +141,21 @@
                 </option>
               </select>
               <p v-if="formErrors.votacioncentro_id" class="text-red-500 text-xs italic mt-1">{{ formErrors.votacioncentro_id[0] }}</p>
+            </div>
+
+            <!-- Campo iscomunal -->
+            <div class="mb-4">
+              <label class="flex items-center space-x-2">
+                <input
+                  id="iscomunal"
+                  v-model="formData.iscomunal"
+                  type="checkbox"
+                  class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+                <span class="text-gray-700 text-sm font-bold">¿Es una elección comunal?</span>
+              </label>
+              <p class="text-gray-500 text-xs mt-1">Si está marcado, se guardará como elección comunal</p>
+              <p v-if="formErrors.iscomunal" class="text-red-500 text-xs italic mt-1">{{ formErrors.iscomunal[0] }}</p>
             </div>
 
             <div class="flex justify-end space-x-3 mt-6">
@@ -203,7 +231,8 @@ export default {
     const formData = ref({
       id: null,
       nombre: '',
-      votacioncentro_id: ''
+      votacioncentro_id: '',
+      iscomunal: false // Valor por defecto false
     });
     
     const formErrors = ref({});
@@ -258,14 +287,16 @@ export default {
         formData.value = { 
           id: evento.id, 
           nombre: evento.nombre,
-          votacioncentro_id: evento.votacioncentro_id
+          votacioncentro_id: evento.votacioncentro_id,
+          iscomunal: evento.iscomunal || false // Cargar el valor existente, por defecto false
         };
       } else {
         isEditing.value = false;
         formData.value = { 
           id: null, 
           nombre: '',
-          votacioncentro_id: ''
+          votacioncentro_id: '',
+          iscomunal: false // Por defecto false al crear nuevo
         };
       }
       formErrors.value = {};
@@ -277,7 +308,8 @@ export default {
       formData.value = { 
         id: null, 
         nombre: '',
-        votacioncentro_id: ''
+        votacioncentro_id: '',
+        iscomunal: false // Resetear a false al cerrar
       };
       formErrors.value = {};
     };
@@ -291,12 +323,14 @@ export default {
         if (isEditing.value) {
           await axios.put(`/eventos/${formData.value.id}`, {
             nombre: formData.value.nombre,
-            votacioncentro_id: formData.value.votacioncentro_id
+            votacioncentro_id: formData.value.votacioncentro_id,
+            iscomunal: formData.value.iscomunal // Incluir el campo iscomunal
           });
         } else {
           await axios.post('/eventos', {
             nombre: formData.value.nombre,
-            votacioncentro_id: formData.value.votacioncentro_id
+            votacioncentro_id: formData.value.votacioncentro_id,
+            iscomunal: formData.value.iscomunal // Incluir el campo iscomunal
           });
         }
         
