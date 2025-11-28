@@ -170,7 +170,30 @@
                         <span>Partidos</span>
                     </router-link>
                 </div>
-                
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/consejos"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'consejos'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Consejos Comunales</span>
+                    </router-link>
+                </div>
+                <div class="px-4 py-2">
+                    <router-link 
+                        to="/proyectos"
+                        class="flex items-center w-full px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:bg-gray-200 transition duration-150 mb-2"
+                        :class="{'bg-gray-200': $route.name === 'proyectos'}"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>Proyectos</span>
+                    </router-link>
+                </div>
                 
                 <!-- Other navigation items... -->
             </nav>

@@ -12,16 +12,16 @@
             <form class="mt-8 space-y-6" @submit.prevent="handleLogin">
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
-                        <label for="email" class="sr-only">Email</label>
+                        <label for="cedula" class="sr-only">Cedula</label>
                         <input 
-                            id="email" 
-                            name="email" 
-                            type="email" 
-                            autocomplete="email" 
+                            id="cedula" 
+                            name="cedula" 
+                            type="text" 
+                            autocomplete="cedula" 
                             required 
                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Email"
-                            v-model="form.email"
+                            placeholder="cedula"
+                            v-model="form.cedula"
                         >
                     </div>
                     <div>
@@ -69,7 +69,7 @@ export default {
         const router = useRouter();
         const authStore = useAuthStore();
         const form = ref({
-            email: '',
+            cedula: '',
             clave: ''
         });
         const isLoading = ref(false);

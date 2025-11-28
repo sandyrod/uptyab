@@ -260,11 +260,11 @@ class UsuarioController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'cedula' => 'required',
             'clave' => 'required|string',
         ]);
 
-        $usuario = Usuario::where('email', $request->email)->first();
+        $usuario = Usuario::where('cedula', $request->cedula)->first();
 
         if (!$usuario || !Hash::check($request->clave, $usuario->clave)) {
             return response()->json(['message' => 'Credenciales inválidas'], 401);

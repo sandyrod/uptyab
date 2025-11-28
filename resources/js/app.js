@@ -18,6 +18,8 @@ import Eventos from './views/Eventos.vue';
 import Afluencias from './views/Afluencias.vue';
 import Comunas from './views/Comunas.vue';
 import Partidos from './views/Partidos.vue';
+import Consejos from './views/Consejos.vue';
+import Proyectos from './views/Proyectos.vue';
 
 import { useAuthStore } from './stores/auth';
 import axios from 'axios';
@@ -107,6 +109,17 @@ const router = createRouter({
                     name: 'partidos',
                     component: Partidos
                 },
+                {
+                    path: 'consejos',
+                    name: 'consejos',
+                    component: Consejos
+                },
+                {
+                    path: 'proyectos',
+                    name: 'proyectos',
+                    component: Proyectos
+                },
+
             ]
         },
         {

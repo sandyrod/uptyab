@@ -15,6 +15,8 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\AfluenciaController;
 use App\Http\Controllers\ComunaController;
 use App\Http\Controllers\PartidoController;
+use App\Http\Controllers\ConsejoComunalController;
+use App\Http\Controllers\ProyectoController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -105,3 +107,18 @@ Route::post('/partidos', [PartidoController::class, 'store']);
 Route::get('/partidos/{id}', [PartidoController::class, 'show']);
 Route::put('/partidos/{id}', [PartidoController::class, 'update']);
 Route::delete('/partidos/{id}', [PartidoController::class, 'destroy']);
+Route::get('/partidos/search/{search}', [PartidoController::class, 'search']);
+
+Route::get('/consejos', [ConsejoComunalController::class, 'index']);
+Route::post('/consejos', [ConsejoComunalController::class, 'store']);
+Route::get('/consejos/{id}', [ConsejoComunalController::class, 'show']);
+Route::put('/consejos/{id}', [ConsejoComunalController::class, 'update']);
+Route::delete('/consejos/{id}', [ConsejoComunalController::class, 'destroy']);
+Route::get('/consejos/search/{search}', [ConsejoComunalController::class, 'search']);
+
+Route::get('/proyectos', [ProyectoController::class, 'index']);
+Route::post('/proyectos', [ProyectoController::class, 'store']);
+Route::get('/proyectos/{id}', [ProyectoController::class, 'show']);
+Route::put('/proyectos/{id}', [ProyectoController::class, 'update']);
+Route::delete('/proyectos/{id}', [ProyectoController::class, 'destroy']);
+Route::get('/proyectos/search/{search}', [ProyectoController::class, 'search']);
