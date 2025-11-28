@@ -12,7 +12,7 @@ return new class extends Migration
    public function up()
     {
         Schema::table('eventos', function (Blueprint $table) {
-            $table->boolean('iscomunal')->default(false)->after('votacion_centro_id');
+            $table->boolean('iscomunal')->default(false)->after('votacioncentro_id');
         });
     }
 
